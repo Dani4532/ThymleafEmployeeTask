@@ -17,7 +17,7 @@
         <th>Subject</th>
         <th>Grade</th>
     </tr>
-    <tr th:each="grade : ${grades}" >
+    <tr th:each="grade : ${student.grades}" >
         <th th:text="${grade.getAssignedDate}"></th>
         <th th:text="${grade.getSubject}"></th>
         <th th:text="${grade.grade}"></th>

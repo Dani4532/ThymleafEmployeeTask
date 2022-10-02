@@ -30,14 +30,13 @@ public class StudentController{
         if (studentRepository.findAll().get(1).getGrades().isEmpty()) {
             gradeLoader.loadGrades();
         }
-        model.addAttribute("content", studentRepository.findAll());
+        model.addAttribute("content", studentRepository.findAllSorted());
         return "students";
     }
 
     @GetMapping("/detail/{id}")
     public String getDetailtoStudent(@PathVariable String id, Model model){
         model.addAttribute("student", studentRepository.findById(id).get());
-        model.addAttribute("grades", studentRepository.getGradesByStudentId(id));
         return "detailPage";
     }
 

@@ -10,20 +10,6 @@ import java.util.List;
 public interface StudentRepository extends JpaRepository<Student, String> {
 
 
-    @Query("""
-            SELECT count(grade) 
-            from Grade grade
-            inner join STUDENTS student on  student.id = grade.studentId
-            group by grade.studentId
-            """)
-    List<String> getallStudentsAndGrades();
-
-    @Query("""
-            select grade
-            from Grade grade
-            where grade.studentId = ?1
-            """)
-    List<Grade> getGradesByStudentId(String id);
 
     @Query("""
             select student
@@ -32,10 +18,4 @@ public interface StudentRepository extends JpaRepository<Student, String> {
             """)
     List<Student> findAllSorted();
 
-    @Query("""
-            update STUDENTS student
-            set student.grades = ?1 
-            where student.id = ?2
-            """)
-    void updateStudent(List<Grade> grades, String studentId);
 }
