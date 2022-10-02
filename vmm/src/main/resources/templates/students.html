@@ -19,7 +19,7 @@
     <tr th:each="con : ${content}" >
         <th th:text="${con.firstName} + ' ' + ${con.lastName}"></th>
         <th>
-            <a th:href="@{detail/{id} (id=${con.studentId})}" th:text="${con.gradeCount} + ' Grades'"></a>
+            <a th:href="@{detail/{id} (id=${con.id})}" th:text="${con.grades.size} + ' Grades'"></a>
         </th>
     </tr>
 </table>

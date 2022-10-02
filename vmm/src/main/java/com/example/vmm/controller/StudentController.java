@@ -1,7 +1,6 @@
 package com.example.vmm.controller;
 
 import com.example.vmm.loader.GradeLoader;
-import com.example.vmm.loader.NameAndGrade;
 import com.example.vmm.repository.GradeRepository;
 import com.example.vmm.repository.StudentRepository;
 import org.springframework.stereotype.Controller;
@@ -10,39 +9,28 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class StudentController{
 
     final private StudentRepository studentRepository;
     final private GradeRepository gradeRepository;
+    final private GradeLoader gradeLoader;
 
-    public StudentController(StudentRepository studentRepository, GradeRepository gradeRepository) throws IOException {
+    public StudentController(StudentRepository studentRepository, GradeRepository gradeRepository) {
         this.studentRepository = studentRepository;
         this.gradeRepository = gradeRepository;
-        var grLoader = new GradeLoader(gradeRepository);
-        grLoader.loadGrades();
+        this.gradeLoader= new GradeLoader(gradeRepository, studentRepository);
+
     }
 
 
     @GetMapping("/students")
-    public String getAllStudents(Model model) {
-
-        var studentList = studentRepository.findAllSorted();
-        var gradeList = studentRepository.getallStudentsAndGrades();
-        List<NameAndGrade> nameGradeList = new ArrayList<>(List.of());
-        for (int i = 0; i < studentList.size(); i++){
-            var student = studentList.get(i);
-            if (gradeList.size() == i){
-                nameGradeList.add(new NameAndGrade(student.getId(), student.getFirstName(), student.getLastName(), "0"));
-            }else{
-                var grade = gradeList.get(i);
-                nameGradeList.add(new NameAndGrade(student.getId(), student.getFirstName(), student.getLastName(), grade));
-            }
+    public String getAllStudents(Model model) throws IOException, InterruptedException {
+        if (studentRepository.findAll().get(1).getGrades().isEmpty()) {
+            gradeLoader.loadGrades();
         }
-        model.addAttribute("content", nameGradeList);
+        model.addAttribute("content", studentRepository.findAll());
         return "students";
     }
 
