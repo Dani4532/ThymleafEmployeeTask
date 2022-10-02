@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All Employees</title>
+</head>
+<style>
+    body {
+        max-width: 250px;
+        padding-top: 100px;
+
+        margin: auto;
+    }
+
+    h3 {
+        ruby-align: center;
+    }
+
+</style>
+<body>
+
+<h3>Employees</h3>
+<form action="#" th:action="@{/api/tasks}" >
+    <select name="id">
+        <option th:each="employee : ${employees}"
+                th:text="${employee.getFirstName} + ' ' + ${employee.getLastName}"
+                th:value="${employee.getId}"></option>
+    </select>
+
+    <input type="submit" value="Tasks">
+</form>
+</body>
+</html>

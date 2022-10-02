@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${employee}"></title>
+</head>
+<style>
+    body{
+        max-width: 500px;
+        margin: auto;
+        padding-top: 300px;
+        font-size: larger;
+    }
+</style>
+<body>
+<table>
+    <tr>
+        <th>Description</th>
+        <th>Finished at</th>
+        <th>Houres worked</th>
+    </tr>
+    <tr th:each="task : ${tasks}">
+        <th th:text="${task.description}"></th>
+        <th th:text="${task.finished}"></th>
+        <th th:text="${task.hoursWorked}"></th>
+    </tr>
+</table>
+</body>
+</html>
