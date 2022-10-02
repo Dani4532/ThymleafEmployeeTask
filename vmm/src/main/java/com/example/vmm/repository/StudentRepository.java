@@ -31,4 +31,11 @@ public interface StudentRepository extends JpaRepository<Student, String> {
             order by student.firstName asc 
             """)
     List<Student> findAllSorted();
+
+    @Query("""
+            update STUDENTS student
+            set student.grades = ?1 
+            where student.id = ?2
+            """)
+    void updateStudent(List<Grade> grades, String studentId);
 }
