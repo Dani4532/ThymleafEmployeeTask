@@ -17,6 +17,7 @@ public record GradeLoader(GradeRepository repository) {
     public void loadGrades() throws IOException {
         var in = Files.lines(Path.of("C:\\Users\\danie\\OneDrive\\Schuljahr22-23\\Programieren\\thymeleaf-basics\\thymleafEmployeeTask\\vmm\\src\\main\\resources\\grades.csv"));
         var grades = in.toList();
+
         var newGrades = grades.subList(1, grades.size());
         newGrades.forEach(grade -> {
             var array = grade.split(",");
