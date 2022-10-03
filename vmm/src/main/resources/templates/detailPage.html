@@ -27,7 +27,8 @@
 <div></div>
 <div></div>
 <h1>New record</h1>
-<form>
+<form action="#" th:action="@{/students}">
+    <input type="text" name="studentId" hidden th:value="${student.id}">
     <label class="subject">Subject: </label>
     <select class="subject" name="subject">
         <option th:value="D">D</option>
@@ -39,17 +40,17 @@
     <br>
     <label class="radio">Grade: </label>
     <label>1 </label>
-    <input type="radio" name="radio" value="1">
+    <input type="radio" name="radio" checked value=1>
     <label>2 </label>
-    <input type="radio" name="radio" value="2">
+    <input type="radio" name="radio" value=2>
     <label>3 </label>
-    <input type="radio" name="radio" value="3">
+    <input type="radio" name="radio" value=3>
     <label>4 </label>
-    <input type="radio" name="radio" value="4">
+    <input type="radio" name="radio" value=4>
     <label>5 </label>
-    <input type="radio" name="radio" value="5">
+    <input type="radio" name="radio" value=5>
     <br>
-    <input type="date">
+    <input type="date" name="date">
     <br>
     <input type="submit" value="SAVE">
 </form>
